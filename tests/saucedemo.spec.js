@@ -1,17 +1,66 @@
-import { test, chromium } from '@playwright/test';
+import { test } from '@playwright/test';
 
-test('SauceDemo Login', async () => {
+import env from '../env/env.config.js';
 
-    const browser = await chromium.launch({ headless: false });
+test('@Regression End to End flow', async ({page}) => {
+    await page.goto(env.BASE_URL);
 
-    const page = await browser.newPage();
+    await page.locator("#user-name").fill(env.USERNAME);
 
-    await page.goto('https://www.saucedemo.com/');
+    await page.locator("#password").fill(env.PASSWORD);
 
-    await page.getByPlaceholder('Username').fill('standard_user');
+    await page.waitForTimeout(3000);
 
-    await page.getByPlaceholder('Password').fill('secret_sauce');
+    await page.locator("#login-button").click();
 
-    await page.getByRole('button', { name: 'Login' }).click();
+    await page.waitForTimeout(3000);
+
+    await page.locator("#product_sort_container").selectOption({label: "Price (high to low)"});
+
+    await page.waitForTimeout(3000);
+
+    await page.locator('button[name="add-to-cart-sauce-labs-fleece-jacket"]').click();
+
+    await page.waitForTimeout(3000);
+
+
+
+
+    //used to locate single elements in HTML DOM Structure
+    const container = page.locator('span[class="shopping_cart_badge"]');
+
+    await container.click();
+
+    await page.waitForTimeout(3000);
+console.log("Regression test case executed successfully");
+console.log("Regression test case executed successfully");
+console.log("Regression test case executed successfully");
+console.log("Regression test case executed successfully");
+console.log("Regression test case executed successfully");
+
+
+
 
 });
+test('@sanityEnd to End flow', async ({page}) => {
+    console.log("Sanity test case executed successfully");
+    console.log("Sanity test case executed successfully");
+    console.log("Sanity test case executed successfully");
+    console.log("Sanity test case executed successfully");
+});
+test('@e2e End to End flow', async ({page}) => {
+    console.log("E2E test case executed successfully");
+    console.log("E2E test case executed successfully");
+    console.log("E2E test case executed successfully");
+    console.log("E2E test case executed successfully");
+});
+test('@smoke End to End flow', async ({page}) => {
+    console.log("Smoke test case executed successfully");
+    console.log("Smoke test case executed successfully");
+    console.log("Smoke test case executed successfully");
+    console.log("Smoke test case executed successfully");
+});
+
+
+
+
