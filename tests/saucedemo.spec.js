@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-import env from '../env/env.config.js';
+import env from './env/env.config.js';
  test.setTimeout(120000);
 
 test('@Regression End to End flow', async ({page}) => {
